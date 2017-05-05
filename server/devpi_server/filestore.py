@@ -10,6 +10,7 @@ from wsgiref.handlers import format_date_time
 import os
 import py
 import re
+import sys
 from devpi_common.types import cached_property, parse_hash_spec
 from .log import threadlog
 
@@ -63,8 +64,8 @@ class FileStore:
             dirname = re.sub('[^a-zA-Z0-9_.-]', '_', dirname)
             key = self.keyfs.PYPIFILE_NOMD5(
                 user=user, index=index,
-                dirname=unqote(dirname),
-                basename=unqote(parts[-1]))
+                dirname=unquote(dirname),
+                basename=unquote(parts[-1]))
         entry = FileEntry(self.xom, key, readonly=False)
         entry.url = link.geturl_nofragment().url
         entry.eggfragment = link.eggfragment
